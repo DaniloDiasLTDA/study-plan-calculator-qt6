@@ -1,7 +1,8 @@
 import csv
 
-# from csv import _reader
 from pathlib import Path
+from typing import Any
+
 
 client_info = [
     ['Name','Value_invoice','PayNotPay'],
@@ -27,14 +28,32 @@ with open(file_name, 'w', newline='', encoding='utf-8') as file_csv:
 # TODO: Create return Type
 def read_file(file_name: str,mode: str = 'r'):
     with open(file_name,mode, newline='', encoding='utf-8') as file:
-        yield csv.reader(file)
+        # todo: fucn to return list dict of rows
+        data: list[dict[str, Any]] = []
+        keys: list[str] = []
 
-def search_client(file_name,key,search_value):
-        with read_file(file_name) as file:
-            print(type(line))
-            print([l for l in line])
-            # if len(line) > key and line[key] == search_value:
-            #     return f'{line}'
+        for i, row in enumerate(csv.reader(file)):
+            if i == 0:
+                keys = row
+                continue        
+            
+            tmp_data = {}
+            for i, value in enumerate(row):
+                tmp_data[keys[i]] = value
+
+            data.append(
+                tmp_data
+            )
+
+        return data
+
+
+# todo: test_search_client
+def search_client(file_name, key, search_value):
+        for line in read_file(file_name):
+            if key in line and line[key] == search_value:
+                return f'{line}'
+
         return None
 
 
@@ -46,17 +65,12 @@ def search_client(file_name,key,search_value):
 #                 else:
 #                    return f'Cliente {line[0]} está dia.'
 
-
-# TODO: Para cada linha desse CSV que estou enviando, quero para cada linha seja
-# enviada para API de pagamento, só enviar o nome se pagou ou não / bool 
-# * Usar uma API de testes
-# * Requisitos: Visto que é uma requesição - Assync IO Python  
-
 keySearch = 0
 
 find_value1 = 'Maria'
-resultS1 = search_client(file_name, keySearch, find_value1)
+resultS1 = search_client(file_name, 'Name', find_value1)
 print(resultS1)
+
 # resultC1 = client_stats(file_name, keySearch, find_value1)
 # print(resultC1)
 
@@ -66,3 +80,8 @@ print(resultS1)
 # resultC2 = client_stats(file_name, keySearch, find_value2)
 # print(resultC2)
 
+# TODO: Para cada linha desse CSV que estou enviando, quero para cada linha seja
+# enviada para API de pagamento, só enviar o nome se pagou ou não / bool 
+# * Usar uma API de testes
+# * Requisitos: Visto que é uma requesição - Assync IO Python  
+# TODO: async def payments_api.post_client_invoice_status(name, pay_not_pay)
