@@ -1,87 +1,94 @@
 import csv
 
 from pathlib import Path
-from typing import Any
 
+ROOT_PATH = 'csv_study/'
 
-client_info = [
-    ['Name','Value_invoice','PayNotPay'],
-    ['Danilo', 200.50, 'NotPay'],
-    ['Italo', 80.99, 'Pay'],
-    ['Maria', 1240.30, 'NotPay'],
-    ['Carlos', 22200, 'Pay'],
+FILE_CSV = ROOT_PATH + 'info_client.csv'
+
+CLIENT_INFO = [
+   {'client_name':'Danilo','client_invoice': 250 ,'paynotpay': 'pay'},
+   {'client_name':'Maria','client_invoice': 660 ,'paynotpay': 'not'},
+   {'client_name':'Jose','client_invoice': 350 ,'paynotpay': 'pay'},
+   {'client_name':'Veneza','client_invoice': 79.90 ,'paynotpay': 'not'},
+   {'client_name':'Saulo','client_invoice': 120.50 ,'paynotpay': 'pay'},
+   {'client_name':'Carlos','client_invoice': 522.99 ,'paynotpay': 'not'},
+   {'client_name':'Mauro','client_invoice': 3698.99, }
 ]
 
-file_name = 'info_payment.csv'
 
-with open(file_name, 'w', newline='', encoding='utf-8') as file_csv:
+class MeuErro(TypeError):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+        print('Error Customizado')
+
+
+with open(FILE_CSV, 'w', newline='', encoding='utf-8') as file_csv:
     """ Cria e abre o arquivo file_name.csv em modo de escrita 'w'
         'newline='' evita linhas em branco
         ecoding='utf-8 codifica corretamente os caracters
     """
-    new_file = csv.writer(file_csv) # cria um objeto CSV
-    new_file.writerows(client_info) # Escreve os dados no arquivo .CSV
+    field_names = ['client_name','client_invoice', 'paynotpay'] # Criando as chaves da lista
+    writing = csv.DictWriter(file_csv, fieldnames=field_names) #DictWriter cria um objeto e mapeia dicionarios em linhas
 
-# criar uma função que lê(open) ou escreve / melhorando o código
+    writing.writeheader()
+    writing.writerows(CLIENT_INFO)
 
-# TODO: how create Enum 
-# TODO: Create return Type
+# TODO: how create Enum - Secundário
+# TODO: Create return Typex - Secundário
+
+# TODO: Função para melhorar e dimuir o código
 def read_file(file_name: str,mode: str = 'r'):
     with open(file_name,mode, newline='', encoding='utf-8') as file:
-        # todo: fucn to return list dict of rows
-        data: list[dict[str, Any]] = []
-        keys: list[str] = []
-
-        for i, row in enumerate(csv.reader(file)):
-            if i == 0:
-                keys = row
-                continue        
-            
-            tmp_data = {}
-            for i, value in enumerate(row):
-                tmp_data[keys[i]] = value
-
-            data.append(
-                tmp_data
-            )
-
-        return data
+        return csv.DictReader(file)
 
 
-# todo: test_search_client
-def search_client(file_name, key, search_value):
-        for line in read_file(file_name):
-            if key in line and line[key] == search_value:
-                return f'{line}'
+def search_client(file_csv: str,search_name):    
+    try:
+        # Simplificar o código usando read_file 40 - 41
+        with open(file_csv, 'r', encoding='utf-8') as file:
+            reader = csv.DictReader(file) 
+            for client in reader:
+                if 'client_name' in client and client['client_name'] == search_name:
+                    return {'Nome': client['client_name'],
+                                'Invoice': client['client_invoice'],
+                                'Status': client['paynotpay']}
+        
+    except FileNotFoundError:
+        print(f'Arquivo {file_csv} não encontrado')
 
-        return None
+    except TypeError:
+        print(f'Nome do arquivo está incorreto {type(file_csv)}')
+    
+    except Exception:
+        return MeuErro()
 
+# TODO: Elaborar uma forma de procurar o status direto do arquivo .csv
+def client_status(list_clients, search_name):
+    for client in list_clients:
+            if 'client_name' in client and client['client_name'] == search_name:
+                if 'paynotpay' in client:
+                    return {'name': client['client_name'], 'status': client['paynotpay']}
+                else:
+                    print(f"Aviso: Cliente '{search_name}' encontrado, mas a chave 'paynotpay' não existe.")
+                    return {'name': client['client_name'], 'status': 'Informação de status ausente'}
 
-# def client_stats(file_name, search_key, search_value):
-#         for line in read_file(file_name):
-#             if len(line) > search_key and line[search_key] == search_value:
-#                 if line[2] == 'NotPay':
-#                    return f'Cliente {line[0]} está com o status: NotPay'
-#                 else:
-#                    return f'Cliente {line[0]} está dia.'
+    return f'Nenhum cliente encontrado com o nome exato "{search_name}".'
 
-keySearch = 0
+arquivo = ROOT_PATH + 'info_client.csv'
 
-find_value1 = 'Maria'
-resultS1 = search_client(file_name, 'Name', find_value1)
-print(resultS1)
+forc_error = None
 
-# resultC1 = client_stats(file_name, keySearch, find_value1)
-# print(resultC1)
+result1 = search_client(arquivo, 'Danilo') # Chama a função corretamente
+print(result1)
 
-# find_value2 = 'Italo'
-# resultS2 = search_client(file_name, keySearch, find_value2)
-# print(resultS2)
-# resultC2 = client_stats(file_name, keySearch, find_value2)
-# print(resultC2)
+# TODO: Criar teste de unidade (PYTEST)
+result2 = search_client(forc_error, 'Maria') #type: ignore
+print(result2)
 
 # TODO: Para cada linha desse CSV que estou enviando, quero para cada linha seja
 # enviada para API de pagamento, só enviar o nome se pagou ou não / bool 
 # * Usar uma API de testes
 # * Requisitos: Visto que é uma requesição - Assync IO Python  
+
 # TODO: async def payments_api.post_client_invoice_status(name, pay_not_pay)
