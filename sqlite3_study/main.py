@@ -26,7 +26,7 @@ cursor.execute(
 )
 connection.commit()
 
-
+#CUIDADO! TODO: Estudar sobre SQL injection
 cursor.execute(
     f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
     '('
