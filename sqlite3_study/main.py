@@ -14,6 +14,19 @@ DB_FOLDER.mkdir(parents=True, exist_ok=True)
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
+#Deleta TODOS dados dentro na tabela
+cursor.execute(
+    f'DELETE FROM {TABLE_NAME}'
+)
+connection.commit()
+
+#Zera as sequências dos ids
+cursor.execute(
+    f'DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"'
+)
+connection.commit()
+
+
 cursor.execute(
     f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
     '('
@@ -27,7 +40,8 @@ connection.commit()
 
 cursor.execute(
     f'INSERT INTO {TABLE_NAME} (id, name, weight) '
-    'VALUES (NULL, "Danilo Dias", 100.2)'
+    'VALUES '
+    '(NULL, "Danilo Dias", 100.2), (NULL, "Marcela Maçã", 55.33)'
 )
 connection.commit()
 
