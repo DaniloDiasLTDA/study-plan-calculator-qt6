@@ -25,5 +25,12 @@ cursor.execute(
 connection.commit()
 
 
+cursor.execute(
+    f'INSERT INTO {TABLE_NAME} (id, name, weight) '
+    'VALUES (NULL, "Danilo Dias", 100.2)'
+)
+connection.commit()
+
+
 cursor.close()
 connection.close()
