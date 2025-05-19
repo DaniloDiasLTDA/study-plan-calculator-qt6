@@ -1,2 +1,4 @@
 # TODO: Evitar conflitos 
 csv_study/*.csv
+httpbin_asyncio/
+*.cpython*
