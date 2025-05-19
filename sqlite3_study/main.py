@@ -2,8 +2,8 @@ import sqlite3
 
 from pathlib import Path
 
-ROOT_FILE = Path(__name__).parent
-DB_FOLDER_NAME = 'sqlite3_study'  # Nome da pasta onde o banco de dados será criado
+ROOT_FILE = Path(__file__).parent
+DB_FOLDER_NAME = 'data'  # Nome da pasta onde o banco de dados será criado
 DB_FOLDER = ROOT_FILE / DB_FOLDER_NAME
 DB_NAME = 'db_sqlite3'
 DB_FILE = DB_FOLDER / DB_NAME
@@ -13,6 +13,7 @@ DB_FOLDER.mkdir(parents=True, exist_ok=True)
 
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
+
 
 #Deleta TODOS dados dentro na tabela
 cursor.execute(
@@ -38,10 +39,15 @@ cursor.execute(
 connection.commit()
 
 
+
+
 cursor.execute(
     f'INSERT INTO {TABLE_NAME} (id, name, weight) '
     'VALUES '
-    '(NULL, "Danilo Dias", 100.2), (NULL, "Marcela Maçã", 55.33)'
+    '(NULL, "Danilo Dias", 100.2),'
+    '(NULL, "Marcela Maçã", 55.33),'
+    '(NULL, "Breno Freire", 2362.62),'
+    '(NULL, "Elion Ações", 421.2)'
 )
 connection.commit()
 
