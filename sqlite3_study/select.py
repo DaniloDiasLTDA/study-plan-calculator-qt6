@@ -7,13 +7,12 @@ connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
 
-def find_name(name: str):
+def find_name():
     try:
         cursor.execute(
-            f'SELECT * FROM {TABLE_NAME} '
-            f'WHERE name = "{name}"'               
+            f'SELECT * FROM {TABLE_NAME} '             
         )
-        row = cursor.fetchone()
+        row = cursor.fetchall()
         cursor.close()
         return row
     
@@ -22,10 +21,8 @@ def find_name(name: str):
     except sqlite3.Error as error:
         print(f"Erro ao acessar o banco de dados: {error}")
 
-row = find_name(2)
+row = find_name()
 print(row)
- 
-
 
 cursor.close()
 connection.close()

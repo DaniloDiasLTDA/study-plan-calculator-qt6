@@ -1,6 +1,7 @@
 import sqlite3
-
+from sqlite3 import IntegrityError
 from pathlib import Path
+
 
 ROOT_FILE = Path(__file__).parent
 DB_FOLDER_NAME = 'data'  # Nome da pasta onde o banco de dados será criado
@@ -14,17 +15,6 @@ DB_FOLDER.mkdir(parents=True, exist_ok=True)
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
-#Deleta TODOS dados dentro na tabela
-cursor.execute(
-    f'DELETE FROM {TABLE_NAME}'
-)
-connection.commit()
-
-#Zera as sequências dos ids
-cursor.execute(
-    f'DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"'
-)
-connection.commit()
 
 #TODO: Estudar sobre SQL injection
 cursor.execute(
@@ -35,18 +25,26 @@ cursor.execute(
     'weight REAL'
     ')'
 )
-connection.commit()
+sql = f"CREATE UNIQUE INDEX IF NOT EXISTS name ON {TABLE_NAME} (name);"
+cursor.execute(sql)
 
 
-cursor.execute(
-    f'INSERT INTO {TABLE_NAME} (id, name, weight) '
-    'VALUES '
-    '(NULL, "Danilo Dias", 100.2),'
-    '(NULL, "Marcela Maçã", 55.33),'
-    '(NULL, "Breno Freire", 2362.62),'
-    '(NULL, "Elion Ações", 421.2)'
-)
 connection.commit()
+
+try:
+    cursor.execute(
+        f'INSERT INTO {TABLE_NAME} ( name, weight) '
+        'VALUES '
+        '("Danilo Dias", 100.2),'
+        '("Marcela Maçã", 55.33),'
+        '("Breno Freire", 2362.62),'
+        '("Elion Ações", 421.2)'
+    )
+    connection.commit()
+except IntegrityError:
+    print('Dados já salvos no DB')
+
+
 
 
 cursor.close()
