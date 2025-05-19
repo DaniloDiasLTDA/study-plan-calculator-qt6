@@ -14,7 +14,6 @@ DB_FOLDER.mkdir(parents=True, exist_ok=True)
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
-
 #Deleta TODOS dados dentro na tabela
 cursor.execute(
     f'DELETE FROM {TABLE_NAME}'
@@ -27,7 +26,7 @@ cursor.execute(
 )
 connection.commit()
 
-#CUIDADO! TODO: Estudar sobre SQL injection
+#TODO: Estudar sobre SQL injection
 cursor.execute(
     f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
     '('
@@ -37,8 +36,6 @@ cursor.execute(
     ')'
 )
 connection.commit()
-
-
 
 
 cursor.execute(
