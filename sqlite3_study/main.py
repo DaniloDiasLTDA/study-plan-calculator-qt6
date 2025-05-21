@@ -1,36 +1,40 @@
+from utils import *
+
 import sqlite3
+
 from sqlite3 import IntegrityError
-from pathlib import Path
 
-
-ROOT_FILE = Path(__file__).parent
-DB_FOLDER_NAME = 'data'  # Nome da pasta onde o banco de dados será criado
-DB_FOLDER = ROOT_FILE / DB_FOLDER_NAME
-DB_NAME = 'db_sqlite3'
-DB_FILE = DB_FOLDER / DB_NAME
-TABLE_NAME = 'customers'
-
-DB_FOLDER.mkdir(parents=True, exist_ok=True)
 
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
 
-#TODO: Estudar sobre SQL injection
-cursor.execute(
-    f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
-    '('
-    'id INTEGER PRIMARY KEY AUTOINCREMENT,'
-    'name TEXT,'
-    'weight REAL'
-    ')'
-)
-sql = f"CREATE UNIQUE INDEX IF NOT EXISTS name ON {TABLE_NAME} (name);"
-cursor.execute(sql)
+#CREATE TABLE TODO: Estudar sobre SQL injection
+try:
+    cursor.execute(
+        f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
+        '('
+        'id INTEGER PRIMARY KEY AUTOINCREMENT,'
+        'name TEXT,'
+        'weight REAL'
+        ')'
+    )
+    connection.commit()
+except sqlite3.Error:
+    print(f"Não foi possivel criar a tabela.")
 
 
-connection.commit()
+#UNIQUE INDEX
+try:
+    cursor.execute(
+        f"CREATE UNIQUE INDEX IF NOT EXISTS name ON {TABLE_NAME} (name);"
+        )
+    connection.commit()
+except sqlite3.Error as e:
+    print(f"Arquivo {TABLE_NAME} não encontrado: {e}")
 
+
+#INSERT
 try:
     cursor.execute(
         f'INSERT INTO {TABLE_NAME} ( name, weight) '
@@ -45,6 +49,30 @@ except IntegrityError:
     print('Dados já salvos no DB')
 
 
+#UPDATE
+new_name = 'Mario Avila'
+person_id = 5
+try:
+    cursor.execute(f"""
+            UPDATE {TABLE_NAME}
+            SET name = ?
+            WHERE id = ?;
+        """, (new_name, person_id))
+    connection.commit()
+except sqlite3.Error as e:
+    print(f"Erro ao atualizar o registro: {e}")
+
+
+#DELETE
+name_delete = 'Breno Freire'
+try:
+    cursor.execute(f"""
+                DELETE FROM {TABLE_NAME}
+                WHERE name = ?;
+            """, (name_delete,))
+    connection.commit()
+except sqlite3.Error:
+    print(f"Erro ao tentar deletar o usuário.")
 
 
 cursor.close()
