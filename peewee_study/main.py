@@ -13,31 +13,16 @@ db.create_tables([Users, Announcement])
 #             email="dias@gmail.com",
 #             password="000111"
 #         )
-# except IntegrityError:
-#     print({'error': 'Este usuario já está cadastrado.'})
-
-
-# try:
 #     user = Users.create(
 #             name="Luis Souza",
 #             email="souzaluis@hotmail.com",
 #             password="000111"
 #         )
-# except IntegrityError:
-#     print({'error': 'Este usuario já está cadastrado.'})
-
-
-# try:
 #     user = Users.create(
 #             name="Agatha Dantas",
 #             email="datas@outlook.com",
 #             password="000111"
 #         )
-# except IntegrityError:
-#     print({'error': 'Este usuario já está cadastrado.'})
-
-
-# try:
 #     user = Users.create(
 #         name="ProgamadorPython",
 #         email="devpython@gmail.com",
@@ -49,9 +34,8 @@ db.create_tables([Users, Announcement])
 
 # try:
 #     user = Users.get(Users.name == "ProgamadorPython")
-        
-#     if user:
-#         user.delete_instance()
+    # if user:
+    #     user.delete_instance()
 # except DoesNotExist:
 #     print('Usuario não existe.')
 
@@ -90,7 +74,7 @@ announ_luiz = Announcement.select().join(Users).where(
 for announ in announ_luiz:
     print(f'Anun id: {announ.id}, Title Anun: {announ.title},Value: {announ.value}')
 
-Announcement.delete().execute()
+# Announcement.delete().execute()
 
 print('Anúncios disponíveis: ', Announcement.select().count())
 
