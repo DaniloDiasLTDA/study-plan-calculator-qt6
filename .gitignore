@@ -1,2 +1,3 @@
-# TODO: Evitar conflitos 
-csv_study/*.csv
+*.csv
+*.db
+*__pycache__/

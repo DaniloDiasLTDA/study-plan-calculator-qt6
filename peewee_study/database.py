@@ -1,25 +1,26 @@
 from utils import DB_FILE
+from datetime import datetime
 
-from peewee import *
+
+from peewee import SqliteDatabase, Model, CharField, ForeignKeyField, TextField, DateTimeField, DecimalField
 
 
 db = SqliteDatabase(DB_FILE)
 
+class BaseModel(Model):
+    class Meta:
+        database = db
 
-class Users(Model):
+
+class User(BaseModel):
     name = CharField()
     email = CharField(unique=True)
     password = CharField()
 
-    class Meta:
-        database = db
 
-
-class Announcement(Model):
-    user = ForeignKeyField(Users, backref='users')
-    title = CharField()
+class Announcement(BaseModel):
+    user = ForeignKeyField(User, backref='announcements')
+    title = CharField(unique=True)
     description = TextField()
     value = DecimalField()
-
-    class Meta:
-        database = db
+    created_at = DateTimeField(default=datetime.now)
