@@ -1,4 +1,4 @@
-# TODO: Evitar conflitos 
-csv_study/*.csv
+*.csv
+*.db
+*__pycache__/
 httpbin_asyncio/
-*.cpython*
