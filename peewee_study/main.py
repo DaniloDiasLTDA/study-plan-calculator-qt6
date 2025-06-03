@@ -73,14 +73,14 @@ for announcement in user.announcements:
 
 #TODO: Pegar os Announcement e dizer qual o seu usuario
 
-# logger.info('Anuncíos Luiz:')
-# announ_luiz = Announcement.select().join(User).where(
-#     User.email == "example@example.com"
-# )
-# for announ in announ_luiz:
-#     logger.info(f'Anun id: {announ.id}, Title Anun: {announ.title},Value: {announ.value}')
+logger.info('Anuncíos Luiz:')
+announ_luiz = Announcement.select().join(User).where(
+    User.email == "example@example.com"
+)
+for announ in announ_luiz:
+    logger.info(f'Anun id: {announ.id}, Title Anun: {announ.title},Value: {announ.value}')
 
-# # Announcement.delete().execute()
+# Announcement.delete().execute()
 
-# logger.info('Anúncios disponíveis: ', Announcement.select().count())
+logger.info('Anúncios disponíveis: %s', Announcement.select().count())
 
