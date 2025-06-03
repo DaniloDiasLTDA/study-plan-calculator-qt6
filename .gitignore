@@ -1,3 +1,4 @@
 *.csv
 *.db
 *__pycache__/
+httpbin_asyncio/
