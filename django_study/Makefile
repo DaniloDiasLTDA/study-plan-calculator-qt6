@@ -13,26 +13,30 @@ setup:
 
 run:
 	python manage.py runserver
-
-migrate:
-	python manage.py migrate
-	@echo "Migrate finsh"
-
-makemigrations:
-	python manage.py makemigrations polls
-
-sqlmigration:
-	python manage.py sqlmigrate polls 0001
-
-shell:
-	python manage.py shell
-
-
-creatadmin:
-	python manage.py createsuperuser
-
+	
+# Cria a estrutura do projeto
 startapp:
 	@echo "Creating Django app: $(APP_NAME)"
 	$(PYTHON) manage.py startapp $(APP_NAME)
 	@echo "Moving $(APP_NAME) to blog folder..."
 	move $(APP_NAME) blog/
+
+# Roda as migrations do projeto
+migrate:
+	python manage.py migrate
+	@echo "Migrate finsh"
+
+# Cria as migrations com base nas models ou alteração delas
+migrations:
+	python manage.py makemigrations $(app-name)
+
+# Antes de executar as migrations, mostra o slq
+sqlmigration:
+	python manage.py sqlmigrate polls $(version)
+
+shell:
+	python manage.py shell
+
+creatadmin:
+	python manage.py createsuperuser
+
