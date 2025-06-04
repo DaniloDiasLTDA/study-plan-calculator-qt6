@@ -1,4 +1,7 @@
 VENV_NAME = .venv
+PYTHON = $(VENV_NAME)/Scripts/python
+
+
 # VENV_INIT = $(VENV_NAME)/Scripts/Activate
 
 
@@ -11,3 +14,25 @@ setup:
 run:
 	python manage.py runserver
 
+migrate:
+	python manage.py migrate
+	@echo "Migrate finsh"
+
+makemigrations:
+	python manage.py makemigrations polls
+
+sqlmigration:
+	python manage.py sqlmigrate polls 0001
+
+shell:
+	python manage.py shell
+
+
+creatadmin:
+	python manage.py createsuperuser
+
+startapp:
+	@echo "Creating Django app: $(APP_NAME)"
+	$(PYTHON) manage.py startapp $(APP_NAME)
+	@echo "Moving $(APP_NAME) to blog folder..."
+	move $(APP_NAME) blog/
