@@ -69,13 +69,15 @@ class UserTest(TestCase):
 
     def test_unique_email_creation(self):
 
-        try:
-            User.objects.create(
-                name="testuser2",
-                email="test@email.test", 
-                password='1223'
-            )
-        except IntegrityError as error:
-            print(f'email já utilizado: {error}')
+        user = User(
+            name="testuser2",
+            email="test@email.test", 
+            password='1223'
+        )
 
+        with self.assertRaises(ValidationError) as cm:
+            user.full_clean()
+    
+        expected_error = 'Announcement with this Title already exists.'
+        self.assertIn(expected_error, str(cm.exception))
 

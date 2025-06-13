@@ -23,10 +23,32 @@ class AnnouncementTest(TestCase):
         )
 
     def test_created_at_auto_now_add(self):
+
         self.assertIsNotNone(self.annoucement.created_at)
         self.assertIsNone(self.annoucement.updated_at)
+    
+    def test_announcement_user(self):
+        self.assertIsNotNone(self.annoucement.user)
 
-    def test_announcement(self):
+    def test_creat_a_announcement_without_user(self):
+
+        announ = Announcement(
+            user=None,
+            title="Test Another Announcement",
+            description='Test Description.',
+            value=decimal.Decimal('2000.01')
+        )
+
+        with self.assertRaises(ValidationError) as cm:
+            announ.full_clean()
+
+        self.assertIn("user", cm.exception.error_dict)
+
+        expected_error = "This field cannot be null."
+        self.assertIn(expected_error, str(cm.exception))
+
+    def test_announcement_fields(self):
+
         self.assertEqual(self.annoucement.title,"Test Announcement")
         self.assertEqual(self.annoucement.description,"Test Description")
         self.assertEqual(self.annoucement.value, 2000.01)
@@ -35,8 +57,8 @@ class AnnouncementTest(TestCase):
 
         announ = Announcement(
             user=self.user,
-            title="Test Announcement - Invalid Max Digits",
-            description='This description is for a max digits test.',
+            title="Test Announcement 3",
+            description='This description 1.',
             value=decimal.Decimal('1234567890.12')
         )
 
@@ -52,9 +74,9 @@ class AnnouncementTest(TestCase):
 
         announ = Announcement(
             user=self.user,
-            title="Test Announcement - Invalid Decimal Value",
-            description='This description is for an invalid value test.',
-            value=decimal.Decimal('1234.567') # Value with 3 decimal places
+            title="Test Announcement 2",
+            description='Test description.',
+            value=decimal.Decimal('1234.567') 
         )
 
         with self.assertRaises(ValidationError) as cm:
@@ -65,8 +87,40 @@ class AnnouncementTest(TestCase):
         expected_error = "Ensure that there are no more than 2 decimal places."
         self.assertIn(expected_error, str(cm.exception))
 
-    def test_announcement_user(self):
-        self.assertIsNotNone(self.annoucement.user)
+    def test_negative_values(self):
+
+        announ = Announcement(
+            user=self.user,
+            title="Test Announcement 2",
+            description='Test description.',
+            value=decimal.Decimal('-1234.567') 
+        )
+
+        with self.assertRaises(ValidationError) as cm:
+            announ.full_clean()
+
+        self.assertIn("value", cm.exception.error_dict)
+
+
+    def test_for_duplicate_tittles(self):
+
+        announ = Announcement(
+            user=self.user,
+            title="Test Announcement",
+            description='Test Description',
+            value=2000.01 
+        )
+
+        with self.assertRaises(ValidationError) as cm:
+            announ.full_clean()
+
+        self.assertIn("title", cm.exception.error_dict)
+
+        expected_error = 'Announcement with this Title already exists.'
+        self.assertIn(expected_error, str(cm.exception))
+
+
+
 
     def test_updated_at_on_save(self):
         # mock

@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from django.core.validators import MinValueValidator
+
 
 
 # Create your models here.
@@ -31,7 +33,7 @@ class Announcement(BaseModel):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(unique=True)
     description = models.TextField()
-    value = models.DecimalField(max_digits=10, decimal_places=2)    
+    value = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])    
 
 
     class Meta:
