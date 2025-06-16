@@ -1,5 +1,6 @@
 import decimal
 
+
 from django.test import TestCase
 from announcements.models import Announcement, User
 from django.core.exceptions import ValidationError
@@ -69,7 +70,6 @@ class AnnouncementTest(TestCase):
         expected_error = "Ensure that there are no more than 10 digits in total."
         self.assertIn(expected_error, str(cm.exception))
 
-
     def test_announcement_value_exceeds_decimal_places(self):
 
         announ = Announcement(
@@ -101,7 +101,6 @@ class AnnouncementTest(TestCase):
 
         self.assertIn("value", cm.exception.error_dict)
 
-
     def test_for_duplicate_tittles(self):
 
         announ = Announcement(
@@ -119,9 +118,6 @@ class AnnouncementTest(TestCase):
         expected_error = 'Announcement with this Title already exists.'
         self.assertIn(expected_error, str(cm.exception))
 
-
-
-
     def test_updated_at_on_save(self):
         # mock
         self.annoucement.title = "Test Updated At"
@@ -131,5 +127,6 @@ class AnnouncementTest(TestCase):
 
         # assert
         self.assertIsNotNone(self.annoucement.updated_at)
+        
 
 

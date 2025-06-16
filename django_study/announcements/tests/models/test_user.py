@@ -1,7 +1,6 @@
 from django.test import TestCase
 from announcements.models import User
 from django.core.exceptions import ValidationError
-from django.db.utils import IntegrityError
 
 
 class UserTest(TestCase):
@@ -78,6 +77,7 @@ class UserTest(TestCase):
         with self.assertRaises(ValidationError) as cm:
             user.full_clean()
     
-        expected_error = 'Announcement with this Title already exists.'
+        expected_error = 'User with this Email already exists.'
         self.assertIn(expected_error, str(cm.exception))
+        
 
