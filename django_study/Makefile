@@ -12,6 +12,9 @@ init:
 run:
 	$(PYTHON) manage.py runserver
 
+test:
+	$(PYTHON) manage.py test $(app-name)
+
 # Cria a estrutura do projeto
 startapp:
 	@echo "Creating Django app: $(app-name)"
