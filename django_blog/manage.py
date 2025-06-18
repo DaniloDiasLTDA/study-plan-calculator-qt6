@@ -3,7 +3,7 @@
 import os
 import sys
 
-from danilodias_dev.settings import APP_SETTINGS_PATH 
+from danilodias.settings import APP_SETTINGS_PATH 
 
 
 def main():

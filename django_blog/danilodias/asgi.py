@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
 
 import os
 
-from danilodias_dev.settings import APP_SETTINGS_PAT
+from danilodias.settings import APP_SETTINGS_PAT
 
 from django.core.asgi import get_asgi_application
 
