@@ -9,6 +9,12 @@ init:
 	$(PYTHON) -m pip install --upgrade pip
 	pip install -r requirements.txt
 
+init-dev: init
+	pip install -r requirements-dev.txt
+
+fmt:
+	ruff format .
+
 # Cria a estrutura do projeto
 startproject:
 	python -m django startproject app
