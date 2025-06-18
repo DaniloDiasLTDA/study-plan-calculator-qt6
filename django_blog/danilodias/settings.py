@@ -14,13 +14,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@--^j$fso41z4o2ulo!!gx$0bl48yra+j&ihk0_&pz9xrk7^qs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = bool(int(os.getenv('DEBUG', 0)))  # Buscar por variaveis de ambiente
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,7 +59,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = f'{APP_NAME}.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
@@ -70,7 +68,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -90,7 +87,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -102,7 +98,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
@@ -113,8 +108,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-<<<<<<<< HEAD:django_blog/danilodias/settings.py
 APP_SETTINGS_PATH = f'{APP_NAME}.settings'
-========
-APP_SETTINGS_PATH = 'danilodias_dev.settings'
->>>>>>>> 5e550ef (feat: setup app name):django_blog/danilodias_dev/settings.py
+
