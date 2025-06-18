@@ -9,8 +9,15 @@ init:
 	$(PYTHON) -m pip install --upgrade pip
 	pip install -r requirements.txt
 
+init-dev: init
+	pip install -r requirements-dev.txt
+
+fmt:
+	ruff format .
+
+# Cria a estrutura do projeto
 startproject:
-	python -m django startproject project
+	python -m django startproject app
 
 run:
 	$(PYTHON) manage.py runserver
@@ -18,7 +25,7 @@ run:
 test:
 	$(PYTHON) manage.py test $(app-name)
 
-# Cria a estrutura do projeto
+# Criar uma django app
 startapp:
 	@echo "Creating Django app: $(app-name)"
 	$(PYTHON) manage.py startapp $(app-name)

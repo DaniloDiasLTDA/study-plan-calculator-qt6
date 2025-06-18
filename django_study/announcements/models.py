@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator
 
 
-# Create your models here.
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
@@ -25,7 +24,7 @@ class User(BaseModel):
     password = models.CharField(max_length=50)
 
     class Meta:
-        app_label = 'announcements' # 
+        app_label = 'announcements'
 
 
 class Announcement(BaseModel):
@@ -35,6 +34,7 @@ class Announcement(BaseModel):
     value = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])    
 
     class Meta:
-        app_label = 'announcements' # 
+        app_label = 'announcements'
+
 
 
