@@ -18,9 +18,7 @@ DEBUG = bool(int(os.getenv('DEBUG', 0)))  # Buscar por variaveis de ambiente
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -113,8 +111,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-<<<<<<<< HEAD:django_blog/danilodias/settings.py
 APP_SETTINGS_PATH = f'{APP_NAME}.settings'
-========
-APP_SETTINGS_PATH = 'danilodias_dev.settings'
->>>>>>>> 5e550ef (feat: setup app name):django_blog/danilodias_dev/settings.py
+
