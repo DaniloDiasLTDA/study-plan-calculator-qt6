@@ -9,6 +9,9 @@ init:
 	$(PYTHON) -m pip install --upgrade pip
 	pip install -r requirements.txt
 
+startproject:
+	python startproject project .
+
 run:
 	$(PYTHON) manage.py runserver
 
