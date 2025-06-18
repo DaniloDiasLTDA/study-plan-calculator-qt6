@@ -3,10 +3,12 @@
 import os
 import sys
 
+from danilodias_dev.settings import APP_SETTINGS_PATH 
+
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', APP_SETTINGS_PATH)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

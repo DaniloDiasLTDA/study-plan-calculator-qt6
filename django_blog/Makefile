@@ -10,7 +10,7 @@ init:
 	pip install -r requirements.txt
 
 startproject:
-	python -m django startproject project
+	python -m django startproject app
 
 run:
 	$(PYTHON) manage.py runserver
