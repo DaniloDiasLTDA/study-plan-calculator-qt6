@@ -19,9 +19,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      
-      - name: Cd
-        run: cd ${{ env.ROOT_PATH }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,22 +27,25 @@ jobs:
 
       - name: Set up Environment
         run: |
+          cd ${{ env.ROOT_PATH }}
           mv .env.example .env
 
       - name: Install Dependencies
         run: |
+          cd ${{ env.ROOT_PATH }}
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt 
 
       - name: Formater
-        run: make fmt
+        run: cd ${{ env.ROOT_PATH }} && make fmt 
 
       - name: Linter
         run: echo "todo"
 
       - name: System Checks
         run: |
-          python manage.py check # Roda as checagens básicas do Django
+            cd ${{ env.ROOT_PATH }}
+            python manage.py check
 
     #   - name: Run Django Migrations (Dry Run)
     #     # É uma boa prática fazer um dry run das migrações para garantir que não há problemas
