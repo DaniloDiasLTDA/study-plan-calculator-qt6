@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 
+load_dotenv()
 
 APP_NAME = 'danilodias'
 
@@ -22,17 +24,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@--^j$fso41z4o2ulo!!gx$0bl48yra+j&ihk0_&pz9xrk7^qs'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.getenv('DEBUG', 0)))  # Buscar por variaveis de ambiente
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+# ALLOWED_HOSTS = [
+#     h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',')
+#     if h.strip()
+# ]
+
+print(os.environ.get('ALLOWED_HOSTS'))
+ALLOWED_HOSTS = list(os.environ.get('ALLOWED_HOSTS', []))
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
