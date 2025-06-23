@@ -10,7 +10,7 @@ on:
       - release/*
 
 env:
-  ROOT_PATH: django_blog
+  ROOT_PATH: django_blog/
 
 jobs:
   build:
@@ -19,6 +19,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      
+      - name: Cd
+        run: cd ${{ env.ROOT_PATH }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,12 +30,12 @@ jobs:
 
       - name: Set up Environment
         run: |
-          mv ${{ env.ROOT_PATH }}/.env.example ${{ env.ROOT_PATH }}/.env
+          mv .env.example .env
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r ${{ env.ROOT_PATH }}/requirements-dev.txt 
+          pip install -r requirements-dev.txt 
 
       - name: Formater
         run: make fmt
