@@ -23,11 +23,11 @@ jobs:
         with:
           python-version: '3.13'
 
-    #   - name: Install dependencies
-    #     run: |
-    #       python -m pip install --upgrade pip
-    #       pip install -r requirements.txt # Certifique-se de ter um requirements.txt
-    #       pip install django-environ # Se você estiver usando django-environ
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r django_blog/requirements-dev.txt
+
 
     #   - name: Configure Environment Variables
     #     run: |
