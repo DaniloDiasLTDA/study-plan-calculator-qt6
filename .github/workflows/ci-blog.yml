@@ -9,6 +9,8 @@ on:
       - main
       - release/*
 
+env:
+  ROOT_PATH: django_blog
 
 jobs:
   build:
@@ -25,12 +27,12 @@ jobs:
 
       - name: Set up Environment
         run: |
-          cp .env.example .env
+          mv ${{ env.ROOT_PATH }}/.env.example ${{ env.ROOT_PATH }}/.env
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r django_blog/requirements-dev.txt
+          pip install -r ${{ env.ROOT_PATH }}/requirements-dev.txt 
 
       - name: Formater
         run: make fmt
