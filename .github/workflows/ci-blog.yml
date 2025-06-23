@@ -1,0 +1,56 @@
+name: CI/Blog
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - release/*
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+    #   - name: Set up Python
+    #     uses: actions/setup-python@v5
+    #     with:
+    #       python-version: '3.9' # Defina a versão do Python que seu Django usa
+
+    #   - name: Install dependencies
+    #     run: |
+    #       python -m pip install --upgrade pip
+    #       pip install -r requirements.txt # Certifique-se de ter um requirements.txt
+    #       pip install django-environ # Se você estiver usando django-environ
+
+    #   - name: Configure Environment Variables
+    #     run: |
+    #       echo "DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}" >> $GITHUB_ENV
+    #       echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> $GITHUB_ENV
+    #       echo "DJANGO_DEBUG=${{ secrets.DJANGO_DEBUG }}" >> $GITHUB_ENV
+    #       # Adicione qualquer outra variável de ambiente que seu Django precise
+    #       # Por exemplo, se você usa DATABASE_URL:
+    #       # echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+    #     # Nota: Não exponha variáveis sensíveis diretamente nos logs.
+    #     # ${{ secrets.NOME_DA_SECRETA }} garante que elas sejam injetadas de forma segura.
+
+    #   - name: Run Django Checks
+    #     run: |
+    #       python manage.py check # Roda as checagens básicas do Django
+
+    #   - name: Run Django Migrations (Dry Run)
+    #     # É uma boa prática fazer um dry run das migrações para garantir que não há problemas
+    #     run: |
+    #       python manage.py migrate --check --noinput
+    #     continue-on-error: true # Permite que o workflow continue mesmo se houver erro aqui
+
+    #   - name: Run Tests
+    #     # Adapte este comando para como você roda seus testes Django
+    #     run: |
+    #       python manage.py test # Roda os testes do seu projeto Django
