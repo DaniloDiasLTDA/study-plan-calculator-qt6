@@ -37,7 +37,7 @@ jobs:
           pip install -r requirements-dev.txt 
 
       - name: Formater
-        run: cd ${{ env.ROOT_PATH }} && ruff check --diff .
+        run:  ruff check --diff ${{ env.ROOT_PATH }}/. 
 
       - name: Linter
         run: echo "todo"
