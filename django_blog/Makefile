@@ -19,7 +19,7 @@ fmt:
 startproject:
 	python -m django startproject app
 
-run:
+run: 
 	$(PYTHON) manage.py runserver
 
 test:
