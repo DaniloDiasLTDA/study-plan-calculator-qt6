@@ -30,16 +30,7 @@ DEBUG = os.environ.get('DEBUG', False)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
-# ALLOWED_HOSTS = [
-#     h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',')
-#     if h.strip()
-# ]
-
-print(os.environ.get('ALLOWED_HOSTS'))
 ALLOWED_HOSTS = list(os.environ.get('ALLOWED_HOSTS', []))
-
 
 # Application definition
 INSTALLED_APPS = [
