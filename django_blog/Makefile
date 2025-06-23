@@ -3,7 +3,7 @@ PYTHON = $(VENV_NAME)/Scripts/python
 
 setup: 
 	@echo "Ambiente virtual pronto.
-	python -m venv $(VENV_NAME)
+	$(PYTHON) -m venv $(VENV_NAME)
 
 init:
 	$(PYTHON) -m pip install --upgrade pip
@@ -13,11 +13,11 @@ init-dev: init
 	pip install -r requirements-dev.txt
 
 fmt:
-	ruff format .
+	$(PYTHON) -m ruff format .
 
 # Cria a estrutura do projeto
 startproject:
-	python -m django startproject app
+	$(PYTHON) -m django startproject app
 
 run: 
 	$(PYTHON) manage.py runserver
