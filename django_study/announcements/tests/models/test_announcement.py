@@ -127,6 +127,3 @@ class AnnouncementTest(TestCase):
 
         # assert
         self.assertIsNotNone(self.annoucement.updated_at)
-        
-
-
