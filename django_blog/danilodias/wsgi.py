@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 
 import os
 
-from danilodias.settings import APP_SETTINGS_PATH
-
 from django.core.wsgi import get_wsgi_application
+
+from danilodias.settings import APP_SETTINGS_PATH
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', APP_SETTINGS_PATH)
 
