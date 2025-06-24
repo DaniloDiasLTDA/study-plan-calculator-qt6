@@ -35,6 +35,3 @@ class Announcement(BaseModel):
 
     class Meta:
         app_label = 'announcements'
-
-
-
