@@ -1,0 +1,22 @@
+exclude = []
+
+line-length = 120
+indent-width = 4
+
+target-version = "py313"
+
+[lint]
+select = ["E", "F", "B", "I", "UP", "N", "ANN", "ERA"] 
+ignore = ["E501"]
+fixable = ["ALL"]
+unfixable = []
+
+[format]
+quote-style = "single"   
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+#TODO: Remover imports não usados 
