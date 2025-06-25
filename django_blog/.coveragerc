@@ -1,10 +1,11 @@
 [run]
-source = .  # Onde buscar os arquivos para análise (diretório atual)
+source = .  
 omit =
     */migrations/*
     */static/*
     */templates/*
-    */venv/*
+    */.venv/*
+    */tests/*
     */admin.py
     */apps.py
     */settings.py
@@ -12,15 +13,13 @@ omit =
     */wsgi.py
     */asgi.py
     manage.py
-    *tests.py  # Exclui os próprios arquivos de teste da cobertura
-    # Adicione aqui outros diretórios ou arquivos que você queira ignorar
+    *tests.py
 plugins =
     django_coverage_plugin
 
 [report]
 show_missing = True
-# Se quiser um limite mínimo de cobertura para falhar o build
-# fail_under = 80
+fail_under = 80
 exclude_lines =
     pragma: no cover
     if TYPE_CHECKING:
@@ -28,4 +27,4 @@ exclude_lines =
     if settings.DEBUG:
 
 [html]
-directory = coverhtml  # Onde o relatório HTML será gerado
+directory = coverhtml

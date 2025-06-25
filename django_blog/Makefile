@@ -23,7 +23,8 @@ run:
 	$(PYTHON) manage.py runserver
 
 test:
-	$(PYTHON) manage.py test $(app-name)
+	coverage run manage.py test
+	coverage report
 
 # Criar uma django app
 startapp:
