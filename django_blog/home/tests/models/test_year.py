@@ -1,9 +1,8 @@
-from datetime import datetime
-
+from django.core.exceptions import ValidationError
 from django.test import TestCase
+
 from home.models import Year
 from validators.date import YEAR_VALIDATOR_MESSAGE
-from django.core.exceptions import ValidationError
 
 
 class YearTest(TestCase):
@@ -21,7 +20,7 @@ class YearTest(TestCase):
         self.assertIsNotNone(self.year.updated_at)
         self.assertEqual(self.year.name, '2099')
 
-    def test_max_length(self):
+    def test_max_length(self) -> None:
         self.year.name = 'a' * 100
 
         with self.assertRaises(ValidationError) as cm:
@@ -30,7 +29,7 @@ class YearTest(TestCase):
         self.assertIn(YEAR_VALIDATOR_MESSAGE, str(cm.exception))
         self.assertIn('name', cm.exception.error_dict)
 
-    def test_unique_validator(self):
+    def test_unique_validator(self) -> None:
         duplicate_year = Year(name='2026')
 
         with self.assertRaises(ValidationError) as cm:
@@ -38,7 +37,7 @@ class YearTest(TestCase):
 
         self.assertIn('Year with this Name already exists.', cm.exception.message_dict['name'])
 
-    def test_name_validator(self):
+    def test_name_validator(self) -> None:
         self.year.name = '2026Q.2'
 
         with self.assertRaises(ValidationError) as cm:
