@@ -42,6 +42,9 @@ jobs:
       - name: Linter
         run: echo "todo"
 
+      - name: Tests
+        run: make test
+
       - name: System Checks
         run: |
             cd ${{ env.ROOT_PATH }}
