@@ -3,7 +3,7 @@ PYTHON = $(VENV_NAME)/Scripts/python
 
 setup: 
 	@echo "Ambiente virtual pronto.
-	$(PYTHON) -m venv $(VENV_NAME)
+	python -m venv $(VENV_NAME)
 
 init:
 	$(PYTHON) -m pip install --upgrade pip
