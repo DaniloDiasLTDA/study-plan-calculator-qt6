@@ -13,7 +13,7 @@ env:
   ROOT_PATH: django_blog/
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -43,7 +43,9 @@ jobs:
         run: echo "todo"
 
       - name: Tests
-        run: make test
+        run: |
+          cd ${{ env.ROOT_PATH }} 
+          make test
 
       - name: System Checks
         run: |
