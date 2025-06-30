@@ -13,17 +13,18 @@ init-dev: init
 	pip install -r requirements-dev.txt
 
 fmt:
-	ruff format .
+	$(PYTHON) -m ruff format .
 
 # Cria a estrutura do projeto
 startproject:
-	python -m django startproject app
+	$(PYTHON) -m django startproject app
 
-run:
+run: 
 	$(PYTHON) manage.py runserver
 
 test:
-	$(PYTHON) manage.py test $(app-name)
+	coverage run manage.py test
+	coverage report
 
 # Criar uma django app
 startapp:

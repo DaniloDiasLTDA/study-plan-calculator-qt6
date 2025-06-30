@@ -79,5 +79,3 @@ class UserTest(TestCase):
     
         expected_error = 'User with this Email already exists.'
         self.assertIn(expected_error, str(cm.exception))
-        
-
