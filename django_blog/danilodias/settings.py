@@ -117,4 +117,3 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APP_SETTINGS_PATH = f'{APP_NAME}.settings'
-
