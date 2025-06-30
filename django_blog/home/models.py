@@ -23,12 +23,9 @@ class Year(BaseModel):
     name = models.CharField(
         max_length=4,
         unique=True,
-        validators=[year_validator],  # Aplica o validador
-        default=datetime.now().year,  # Define o ano atual como valor padrão
+        validators=[year_validator],
+        default=datetime.now().year,
     )
 
     def __str__(self):
         return str(self.name)
-
-    class Meta:
-        app_label = 'home'
