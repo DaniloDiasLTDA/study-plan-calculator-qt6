@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ops! Algo deu errado{% endblock %}</title>
+    <style>
+        /* Cores da paleta */
+        :root {
+            --primary-color: #1b1464;
+            --secondary-color: #006dff;
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --light-text-color: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0; /* Resetando margens padrão */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Garante que a página ocupe toda a altura da tela */
+            padding: 20px; /* Espaçamento interno geral */
+            box-sizing: border-box; /* Garante que o padding não afete a largura total */
+        }
+
+        .container {
+            background-color: var(--light-text-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            padding: 30px;
+            text-align: center;
+            max-width: 80%; /* Largura máxima para telas maiores */
+            width: 550px; /* Largura padrão */
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .error-code {
+            font-size: 4em;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+
+
+        /* .navigation-link {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--light-text-color);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        } */
+
+        .navigation-link {
+            display: inline-block;
+            background-color: var(--secondary-color); /* Cor de fundo padrão (secundária) */
+            color: var(--light-text-color);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation-link:hover {
+            background-color: var(--primary-color); 
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container {
+                max-width: 95%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .error-code {
+                font-size: 3em;
+            }
+
+            .navigation-link {
+                font-size: 0.9em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+</html>
