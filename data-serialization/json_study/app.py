@@ -5,7 +5,7 @@ from pathlib import Path
 import asyncio
 from aiohttp import web
 
-ROOT_PATH = Path('.')
+ROOT_PATH = Path('')
 
 logger = logging.getLogger(__name__)
 
