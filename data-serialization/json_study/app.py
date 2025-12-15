@@ -5,7 +5,7 @@ from pathlib import Path
 import asyncio
 from aiohttp import web
 
-ROOT_PATH = Path('.')
+ROOT_PATH = Path('')
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ def find_json_file(file_name):
     else:
         return None
 
-
+#TODO: refatorar o path do arquivo clientes.json
 async def open_clients():
     file_path = find_json_file('clientes.json')
     with open(file_path, 'r') as f:
