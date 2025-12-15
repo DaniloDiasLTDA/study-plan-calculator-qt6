@@ -1,0 +1,32 @@
+[run]
+source = .  
+omit =
+    */migrations/*
+    */static/*
+    */templates/*
+    */.venv/*
+    */tests/*
+    */admin.py
+    */apps.py
+    */settings.py
+    */urls.py
+    */wsgi.py
+    */asgi.py
+    manage.py
+    *tests.py
+    *requirements.txt
+    *requirements-dev.txt
+plugins =
+    django_coverage_plugin
+
+[report]
+show_missing = True
+fail_under = 80
+exclude_lines =
+    pragma: no cover
+    if TYPE_CHECKING:
+    raise NotImplementedError
+    if settings.DEBUG:
+
+[html]
+directory = coverhtml
