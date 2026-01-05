@@ -5,3 +5,5 @@ httpbin_asyncio/
 *.venv/
 
 *.pyc
+
+challenge_learn/
