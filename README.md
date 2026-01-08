@@ -1,3 +1,3 @@
-# study-plan-calculator-qt6
+# python-backend-lab
 
 Repositório com fins estudantis 
