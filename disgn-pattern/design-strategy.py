@@ -29,8 +29,26 @@ class OldAdapterSaver(StrategyBackup):
   def save_file(self, file_name):
     return self.old_service.save_raw_data(file_name)
 
-old_service = OldService()
 
-adapter = OldAdapterSaver(old_service)
+class ManagementBackup:
+    def __init__(self, strategy: StrategyBackup):
+      self._strategy = strategy
 
-print(adapter.save_file("projeto_final.zip"))
+    def define_strategy(self, new_strategy: StrategyBackup):
+        print("---Alterando a estratégia de backup---")
+        self._strategy = new_strategy
+
+    def execute_backup(self, file_name):
+        result = self._strategy.save_file(file_name)
+        print(result)
+
+
+drive = BackupGoogleDrive()
+ftp = BackupFTP()
+
+management = ManagementBackup(drive)
+management.execute_backup("curriculo_danilo.pdf")
+
+management.define_strategy(ftp)
+management.execute_backup("fotos_viagem.zip")
+
