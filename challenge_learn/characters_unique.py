@@ -20,3 +20,4 @@ word2 = "sample"
 print(has_unique_char(word1))
 
 print(has_unique_characters(word2))
+

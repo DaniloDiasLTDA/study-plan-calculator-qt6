@@ -9,3 +9,4 @@ def find_second_smallest(lst):
 lista = [1, 1, 3, 4, 6]
 
 print(find_second_smallest(lista))
+

@@ -77,3 +77,4 @@ station.register_observer(alert_system)
 station.set_measurements(25, 10, 1013)
 
 station.set_measurements(22, 65, 1005)
+

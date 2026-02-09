@@ -62,4 +62,3 @@
 #    #     # Adapte este comando para como você roda seus testes Django
 #    #     run: |
 #    #       python manage.py test # Roda os testes do seu projeto Django
-#
