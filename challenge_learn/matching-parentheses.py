@@ -4,9 +4,9 @@ from collections import deque
 def checking_mach_parentheses(s):
     stack = deque()
     for char in s:
-        if char == '(':
+        if char == "(":
             stack.append(char)
-        elif char == ')':
+        elif char == ")":
             if not stack:
                 return False
             stack.pop()

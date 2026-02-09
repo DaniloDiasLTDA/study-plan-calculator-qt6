@@ -1,11 +1,18 @@
-from utils import DB_FILE
 from datetime import datetime
 
-
-from peewee import SqliteDatabase, Model, CharField, ForeignKeyField, TextField, DateTimeField, DecimalField
-
+from peewee import (
+    CharField,
+    DateTimeField,
+    DecimalField,
+    ForeignKeyField,
+    Model,
+    SqliteDatabase,
+    TextField,
+)
+from utils import DB_FILE
 
 db = SqliteDatabase(DB_FILE)
+
 
 class BaseModel(Model):
     class Meta:
@@ -19,7 +26,7 @@ class User(BaseModel):
 
 
 class Announcement(BaseModel):
-    user = ForeignKeyField(User, backref='announcements')
+    user = ForeignKeyField(User, backref="announcements")
     title = CharField(unique=True)
     description = TextField()
     value = DecimalField()

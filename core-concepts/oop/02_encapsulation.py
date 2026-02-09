@@ -1,4 +1,5 @@
-#Encapsulamento
+# Encapsulamento
+
 
 class BankAccount:
     def __init__(self, amount):
@@ -48,6 +49,7 @@ class Rectangle:
     def area(self):
         return self._width * self._height
 
+
 # Teste Rectangle
 print("--- Testes Retangulo ---")
 rectangle1 = Rectangle(width=10, height=5)
@@ -87,6 +89,7 @@ class Developer(Employee):
     def calculate_salary(self):
         return self._base_salary * (1 + self._dev_bonus)
 
+
 class Manager(Employee):
     def __init__(self, name, base_salary, risk_bonus: float):
         super().__init__(name, base_salary)
@@ -98,7 +101,7 @@ class Manager(Employee):
 
 # Teste Employee
 try:
-    employee = Employee("Danilo", 220) # Vai dar erro proposital
+    employee = Employee("Danilo", 220)  # Vai dar erro proposital
 except ValueError as e:
     print(f"Erro ao inicializar Funcionario: {e}")
 

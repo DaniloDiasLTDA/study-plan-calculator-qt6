@@ -7,10 +7,12 @@ class Cat:
     def make_sound():
         print("Sound cat")
 
+
 class Dog:
     @staticmethod
     def make_sound():
         print("Sound Dog")
+
 
 def play_sound(animal):
     animal.make_sound()
@@ -20,6 +22,7 @@ def play_sound(animal):
 class Animal:
     def make_sound(self):
         print("Este animal faz um som.")
+
 
 class Cat2(Animal):
     def make_sound(self):
@@ -32,9 +35,11 @@ class Notifier(ABC):
     def send(self, message: str):
         pass
 
+
 class EmailNotifier(Notifier):
     def send(self, message: str):
         print(f"Enviando um Email: {message}")
+
 
 class SMSNotifier(Notifier):
     def send(self, message: str):
@@ -50,6 +55,7 @@ class Asset(ABC):
     def get_description(self) -> str:
         pass
 
+
 class Stock(Asset):
     def __init__(self, ticker: str, price: float, description: str):
         super().__init__(price)
@@ -58,6 +64,7 @@ class Stock(Asset):
 
     def get_description(self) -> str:
         return f"{self.ticker}: {self.price:.2f} -- {self.description}"
+
 
 class Bond(Asset):
     def __init__(self, price: float, name: str, duration: int, interest_rate: float):

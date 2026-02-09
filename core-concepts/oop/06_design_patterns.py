@@ -42,7 +42,7 @@ class ContaBancaria(LogavelMixin):
 class MetaVerificadora(type):
     def __new__(mcs, name, bases, attrs):
         print(f"--> Analisando a classe {name} antes de ela nascer...")
-        if '__doc__' not in attrs or not attrs['__doc__']:
+        if "__doc__" not in attrs or not attrs["__doc__"]:
             raise TypeError(f"A classe {name} PRECISA ter uma docstring explicativa!")
         return super().__new__(mcs, name, bases, attrs)
 

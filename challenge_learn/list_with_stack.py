@@ -1,7 +1,6 @@
 
+
 card_stack = []
-
-
 
 card_stack.append("Ace")
 card_stack.append("Jack")

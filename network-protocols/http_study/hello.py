@@ -1,22 +1,24 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template, request
 
-app = Flask(__name__, template_folder='./templates')
+app = Flask(__name__, template_folder="./templates")
 
 
-@app.route('/')
+@app.route("/")
 def index():
     # todo: helphcheck
-    return 'Index Page'
+    return "Index Page"
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == 'GET':
+    if request.method == "GET":
         try:
             # json_study.parse()
-            raise Exception('NotImplemented')
+            raise Exception("NotImplemented")
         except Exception as e:
-            print('Error: ' + str(e))
-            return render_template("500_generic.html",), 500
+            print("Error: " + str(e))
+            return render_template(
+                "500_generic.html",
+            ), 500
     else:
-        return 'NotImplemented'
+        return "NotImplemented"

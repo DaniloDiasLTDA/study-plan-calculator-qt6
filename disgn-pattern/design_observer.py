@@ -9,7 +9,7 @@ class Observer(ABC):
 
 class BackupSystem:
     def __init__(self):
-        self._observers = [] # Lista de inscritos
+        self._observers = []  # Lista de inscritos
 
     def subscribe(self, observer):
         if observer not in self._observers:

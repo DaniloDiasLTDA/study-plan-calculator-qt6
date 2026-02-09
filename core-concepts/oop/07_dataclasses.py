@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-#Obs: Usando eq=Flase para evitar que o dataclass gere automaticamente métodos de comparação!
+# Obs: Usando eq=Flase para evitar que o dataclass gere automaticamente métodos de comparação!
+
 
 @dataclass(eq=False)
 class AssetData:

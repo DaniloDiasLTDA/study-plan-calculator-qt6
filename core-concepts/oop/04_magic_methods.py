@@ -1,5 +1,3 @@
-
-
 # 1. Representação (__str__ vs __repr__)
 class Book:
     def __init__(self, title, author):
