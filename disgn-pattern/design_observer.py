@@ -6,6 +6,7 @@ class Observer(ABC):
     def update(self, message):
         pass
 
+
 class BackupSystem:
     def __init__(self):
         self._observers = [] # Lista de inscritos
@@ -23,11 +24,13 @@ class BackupSystem:
 
     def run_backup(self, file_name):
         print(f"Executando backup de {file_name}...")
-        self.notify(f"Backup do arquivo '{file_name}' concluído com sucesso!")
+        self.notify(f"Backup do arquivo '{file_name}' concluído.")
+
 
 class UserNotification(Observer):
     def update(self, message):
         print(f"Notificação de atualização: {message}")
+
 
 class ITSupport(Observer):
     def update(self, message):
