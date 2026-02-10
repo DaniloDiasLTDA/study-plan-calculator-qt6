@@ -15,4 +15,3 @@ def checking_mach_parentheses(s):
 
 sa = "(movi)ment(o)"
 print(checking_mach_parentheses(sa))
-

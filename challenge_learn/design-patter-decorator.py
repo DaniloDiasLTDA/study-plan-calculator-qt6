@@ -84,4 +84,3 @@ order = Peppers(order)
 
 print(f"Pedido: {order.get_description()}")
 print(f"Total: R$ {order.cost():.2f}")
-

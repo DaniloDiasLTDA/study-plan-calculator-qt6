@@ -1,5 +1,3 @@
-
-
 card_stack = []
 
 card_stack.append("Ace")

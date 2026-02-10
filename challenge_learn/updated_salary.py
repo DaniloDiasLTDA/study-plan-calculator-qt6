@@ -1,5 +1,3 @@
-
-
 def update_salary(employee_salaries: dict, name: str, adjustment: float):
     if name not in employee_salaries:
         return "Funcionário não encontrado"
@@ -13,4 +11,3 @@ def update_salary(employee_salaries: dict, name: str, adjustment: float):
 salary = {"alice": 5000, "bob": 2344}
 
 print(update_salary(salary, "alice", 0.23))
-
